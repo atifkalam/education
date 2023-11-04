@@ -19,7 +19,7 @@ mysql.init_app(app)
 @app.route("/")
 def index():
     """Function to test the functionality of the API"""
-    return "Hello, world!"
+    return "This is an assignment for BTH to spin an environment with API and DB !"
 
 
 @app.route("/create", methods=["POST"])
