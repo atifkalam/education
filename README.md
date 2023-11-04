@@ -19,7 +19,7 @@ This repo contains code that
 `root` user of the `MySQL` server using the `Opaque` secret type. For more info: https://kubernetes.io/docs/concepts/configuration/secret/
 
 1. Encode your password in your terminal: `echo -n super-secret-passwod | base64`
-2. Add the output to the `flakapi-secrets.yml` file at the `db_root_password` field
+2. Add the output to the `flaskapi-secrets.yml` file at the `db_root_password` field
 
 ## Deployments
 Get the secrets, persistent volume in place and apply the deployments for the `MySQL` database and `Flask API`
@@ -42,7 +42,7 @@ The API can only be used if the proper database and schemas are set. This can be
     3. `CREATE TABLE users(user_id INT PRIMARY KEY AUTO_INCREMENT, user_name VARCHAR(255), user_email VARCHAR(255), user_password VARCHAR(255));`
     
 ## Expose the API
-The API can be accessed by exposing it using minikube: `minikube service flask-service`. This will return a `URL`. If you paste this to your browser you will see the `hello world` message. You can use this `service_URL` to make requests to the `API`
+The API can be accessed by exposing it using minikube: `minikube service flask-service`. This will return a `URL`. If you paste this to your browser you will see the `This is an assignment for BTH to spin an environment with API and DB !` message. You can use this `service_URL` to make requests to the `API`
 
 ## Start making requests
 Now you can use the `API` to `CRUD` your database
