@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskapi2-deployment
+  labels:
+    app: flaskapi2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flaskapi2
+  template:
+    metadata:
+      labels:
+        app: flaskapi2
+    spec:
+      containers:
+        - name: flaskapi2
+          image: mukulmahajan02/flask-api2:v1
+          ports:
+            - containerPort: 6000
+          env:
+            - name: db_root_password
+              valueFrom:
+                secretKeyRef:
+                  name: flaskapi-secrets
+                  key: db_root_password
+            - name: db_name
+              value: flaskapi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask2-service
+spec:
+  ports:
+  - port: 6000
+    protocol: TCP
+    targetPort: 6000
+  selector:
+    app: flaskapi2
+  type: LoadBalancer
