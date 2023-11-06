@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: flaskapi
-          image: mak791/education:ver2
+          image: mak791/education:api1ver1
           ports:
             - containerPort: 5000
           env:

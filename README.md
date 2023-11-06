@@ -28,6 +28,7 @@ Get the secrets, persistent volume in place and apply the deployments for the `M
 2. Create the `persistent volume` and `persistent volume claim` for the database: `kubectl apply -f mysql-pv.yml`
 3. Create the `MySQL` deployment: `kubectl apply -f mysql-deployment.yml`
 4. Create the `Flask API` deployment: `kubectl apply -f flaskapp-deployment.yml`
+5. Create the `Flask API2` deployment: `kubectl apply -f flaskapp-deployment-api2.yml`
 
 You can check the status of the pods, services and deployments.
 
@@ -40,9 +41,10 @@ The API can only be used if the proper database and schemas are set. This can be
    1. `CREATE DATABASE flaskapi;`
     2. `USE flaskapi;`
     3. `CREATE TABLE users(user_id INT PRIMARY KEY AUTO_INCREMENT, user_name VARCHAR(255), user_email VARCHAR(255), user_password VARCHAR(255));`
+    4. `CREATE TABLE unit(user_name INT, user_grade VARCHAR(255), user_department VARCHAR(255), Constraint API2_FK Foreign Key (user_name) references users (user_id));`
     
 ## Expose the API
-The API can be accessed by exposing it using minikube: `minikube service flask-service`. This will return a `URL`. If you paste this to your browser you will see the `This is an assignment for BTH to spin an environment with API and DB !` message. You can use this `service_URL` to make requests to the `API`
+The API can be accessed by exposing it using minikube: `minikube service flask-service` & `minikube service flask2-service`. This will return a `URL`. If you paste this to your browser you will see the `This is an assignment for BTH to spin an environment with API and DB !` message. You can use this `service_URL` to make requests to the `API`
 
 ## Start making requests
 Now you can use the `API` to `CRUD` your database

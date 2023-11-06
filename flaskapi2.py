@@ -1,9 +1,9 @@
-"""Code for a flask API to Create, Read, Update, Delete users"""
+"""Code for a flask API2 to Create, Read, Update, Delete different units linked to users"""
 import os
 from flask import jsonify, request, Flask
 from flaskext.mysql import MySQL
 
-app = Flask(__name__)
+app = Flask2(__name__)
 
 mysql = MySQL()
 
@@ -19,12 +19,12 @@ mysql.init_app(app)
 @app.route("/")
 def index():
     """Function to test the functionality of the API"""
-    return "API-2 initialized Sucessfully"
+    return "API-2 initialized Sucessfully with Unit details"
 
 
 @app.route("/create", methods=["POST"])
-def add_unit():
-    """Function to create a user to the MySQL database"""
+def add_user():
+    """Function to create a unit to the MySQL database"""
     json = request.json
     name = json["name"]
     grade = json["grade"]
@@ -130,4 +130,4 @@ def delete_user(grade):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=6000)

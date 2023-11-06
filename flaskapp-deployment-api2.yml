@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: flaskapi2
-          image: mukulmahajan02/flask-api2:v1
+          image: mak791/education:api2ver2
           ports:
             - containerPort: 6000
           env:
