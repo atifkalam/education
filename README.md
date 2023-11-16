@@ -13,6 +13,7 @@ This repo contains code that
 2. Configure `Docker` to use the `Docker daemon` in your kubernetes cluster via your terminal: `eval $(minikube docker-env)`
 3. Pull the latest mysql image from `Dockerhub`: `Docker pull mysql`
 4. Build a kubernetes-api image with the Dockerfile in this repo: `Docker build . -t flask-api`
+5. Build a kubernetes-api image with the Dockerfile in this repo: `Docker build . -t flask2-api`
 
 ## Secrets
 `Kubernetes Secrets` can store and manage sensitive information. For this example we will define a password for the

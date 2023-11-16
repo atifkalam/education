@@ -3,7 +3,7 @@ import os
 from flask import jsonify, request, Flask
 from flaskext.mysql import MySQL
 
-app = Flask2(__name__)
+app = Flask(__name__)
 
 mysql = MySQL()
 
@@ -40,7 +40,7 @@ def add_user():
             conn.commit()
             cursor.close()
             conn.close()
-            resp = jsonify("User created successfully!")
+            resp = jsonify("Department created successfully!")
             resp.status_code = 200
             return resp
         except Exception as exception:
@@ -51,7 +51,7 @@ def add_user():
 
 @app.route("/unit", methods=["GET"])
 def unit():
-    """Function to retrieve all users from the MySQL database"""
+    """Function to retrieve all units from the MySQL database"""
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
@@ -66,13 +66,13 @@ def unit():
         return jsonify(str(exception))
 
 
-@app.route("/unit/<int:grade>", methods=["GET"])
-def unit(grade):
+@app.route("/unit/<int:user_name>", methods=["GET"])
+def unit(user_name):
     """Function to get information of a specific user in the MSQL database"""
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM unit WHERE grade=%s", grade)
+        cursor.execute("SELECT * FROM unit WHERE user_name=%s", user_name)
         row = cursor.fetchone()
         cursor.close()
         conn.close()
@@ -83,46 +83,17 @@ def unit(grade):
         return jsonify(str(exception))
 
 
-@app.route("/update", methods=["POST"])
-def update_grade():
-    """Function to update a user in the MYSQL database"""
-    json = request.json
-    name = json["name"]
-    grade = json["grade"]
-    department = json["department"]
-    user_id = json["user_id"]
-    if name and grade and department and user_id and request.method == "POST":
-        # save edits
-        sql = "UPDATE unit SET user_name=%s, user_grade=%s, " \
-              "user_department=%s WHERE user_id=%s"
-        data = (name, grade, department, user_id)
-        try:
-            conn = mysql.connect()
-            cursor = conn.cursor()
-            cursor.execute(sql, data)
-            conn.commit()
-            resp = jsonify("Unit updated successfully!")
-            resp.status_code = 200
-            cursor.close()
-            conn.close()
-            return resp
-        except Exception as exception:
-            return jsonify(str(exception))
-    else:
-        return jsonify("Please provide id, name, grade and department")
-
-
-@app.route("/delete/<int:grade>")
-def delete_user(grade):
+@app.route("/delete/<int:user_name>")
+def delete_user(user_name):
     """Function to delete a user from the MySQL database"""
     try:
         conn = mysql.connect()
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM unit WHERE grade=%s", grade)
+        cursor.execute("DELETE FROM unit WHERE user_name=%s", user_name)
         conn.commit()
         cursor.close()
         conn.close()
-        resp = jsonify("User deleted successfully!")
+        resp = jsonify("Department deleted successfully!")
         resp.status_code = 200
         return resp
     except Exception as exception:
